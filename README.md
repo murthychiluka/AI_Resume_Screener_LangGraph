@@ -126,3 +126,108 @@ RAG = Finds relevant information for the LLM.
 LLM + RAG = Generates an answer using retrieved information.
 
 Think of an LLM as a student answering from memory, while RAG lets the student consult the relevant textbook before answering.
+**********************************************************************************
+deterministic ---rule based
+probabilistic ---LLM
+Human ---- human in the loop
+
+Let us understand these three concepts in simple terms, with examples from AWS DevOps and AI.
+
+## 1. Deterministic = Rule-based
+Meaning: The system follows predefined rules and produces predictable results for the same input, assuming the same conditions.
+
+Example: AWS auto-scaling rule.
+
+IF CPU utilization > 80%
+THEN add 1 EC2 instance
+If CPU utilization crosses 80%, the rule triggers the action.
+
+Other examples:
+
+If a password is incorrect, reject the login.
+
+If a file extension is .log, move it to the log folder.
+
+If a Jenkins test fails, fail the pipeline.
+
+Remember: Deterministic means follow the rules and get a predictable result.
+
+## 2. Probabilistic = LLM-based
+Meaning: The system uses probabilities to determine what output is likely to be appropriate. The output may vary, and it is not guaranteed to be correct.
+
+Example: Ask an LLM:
+
+"What is the reason my EC2 instance is not connecting?"
+
+The LLM might suggest:
+
+Check the security group.
+
+Check the network ACL.
+
+Check whether SSH is running.
+
+Check the route table.
+
+It generates an answer based on learned patterns and the context of your question. It does not automatically know the actual cause unless it has access to relevant evidence, such as logs or AWS tools.
+
+Other examples:
+
+An AI chatbot answering questions.
+
+An AI model summarizing an incident report.
+
+An AI system classifying a support ticket.
+
+Remember: Probabilistic means the system estimates what answer is likely, rather than simply following one fixed rule.
+
+## 3. Human in the loop = Human reviews or approves
+Meaning: AI or automation does some of the work, but a human checks the result or makes an important decision.
+
+Example: Production deployment.
+
+Step 1: AI suggests a fix
+
+"Increase the number of EKS replicas."
+
+Step 2: Automation prepares the change
+
+Creates a deployment change or pull request.
+
+Step 3: Human approval
+
+The DevOps engineer reviews and approves the change.
+
+Step 4: Deploy to production
+
+The pipeline deploys only after approval.
+
+Other examples:
+
+A doctor reviews an AI-generated diagnosis.
+
+A security engineer approves a firewall change.
+
+A DevOps engineer approves a production deployment.
+
+Remember: Human in the loop means a person remains involved in reviewing or approving the result.
+
+## Quick Comparison
+
+| Concept | Who or What Makes the Decision? | Example |
+|---|---|---|
+| **Deterministic** | Predefined rules | CPU usage above 80% → trigger scaling |
+| **Probabilistic** | Model estimates the likely output | LLM suggests a troubleshooting fix |
+| **Human in the Loop** | Human reviews or approves | Engineer approves production deployment |
+
+
+How are they used together in AI agents?
+In a real-world AI agent system, you can combine all three:
+
+LLM (probabilistic): Investigates an EC2 incident and suggests a fix.
+
+Rules (deterministic): Prevent the agent from deleting production resources without authorization.
+
+Human in the loop: Requires an engineer to approve a high-impact action.
+
+The key idea is that AI provides flexibility, rules provide predictable safeguards, and humans provide oversight.
