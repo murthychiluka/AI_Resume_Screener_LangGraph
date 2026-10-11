@@ -48,4 +48,81 @@ Run the solution
 ```
 streamlit run src\main.py
 ```
+***********************************************************************************************************************************
+## LLM alone without RAG—→ may give hallucinations
 
+1. What is an LLM alone?
+LLM (Large Language Model) is an AI model like ChatGPT that understands your question and generates an answer based on patterns learned during training.
+
+Imagine you ask:
+
+Question: What is our company's annual leave policy?
+
+The LLM has not been given your company's leave policy. It may still generate an answer that sounds correct, even though it doesn't know your actual policy.
+
+For example, it might say, "Employees receive 20 days of annual leave."
+
+But your company might actually provide only 15 days!
+
+This is called a hallucination — when AI generates incorrect or unsupported information as if it were true.
+
+2. What is RAG, and how does it help?
+RAG stands for Retrieval-Augmented Generation.
+
+It allows an LLM to retrieve relevant information from external documents or a knowledge base before generating an answer.
+
+Step 1: User asks a question
+
+"How many annual leave days do employees get?"
+
+Step 2: RAG retrieves information
+
+Finds the relevant company HR policy document, which says 15 days.
+
+Step 3: LLM generates an answer
+
+"According to the company HR policy, employees receive 15 days of annual leave."
+
+RAG gives the LLM relevant information to use when answering. This can reduce hallucinations, although it cannot eliminate them completely.
+
+3. LLM alone vs. LLM + RAG
+LLM alone
+
+LLM + RAG
+
+Answers using what it learned during training and the current conversation.
+
+Retrieves relevant external information before answering.
+
+May not know your latest or private information.
+
+Can access updated or private information if the knowledge source is available and authorized.
+
+May guess when information is missing.
+
+Can give answers grounded in retrieved documents.
+
+Example: guesses company leave policy.
+
+Example: checks the actual HR policy.
+
+4. How does this apply to AWS DevOps?
+Suppose you build an AI assistant to help troubleshoot your AWS environment.
+
+LLM alone: You ask, "Why is my EC2 instance not connecting?" The LLM gives general troubleshooting suggestions.
+
+LLM + RAG: The assistant retrieves your company's AWS architecture documents, troubleshooting guides, and runbooks, then provides advice based on those materials.
+
+For example, it might find a runbook explaining that your private EC2 instance requires access through a bastion host or AWS Systems Manager.
+
+One important point: RAG does not automatically access live AWS resources. To inspect actual instance status, logs, or security groups, the assistant would also need suitable tools and permissions.
+
+Remember this simple formula:
+
+LLM = Thinks and generates an answer.
+
+RAG = Finds relevant information for the LLM.
+
+LLM + RAG = Generates an answer using retrieved information.
+
+Think of an LLM as a student answering from memory, while RAG lets the student consult the relevant textbook before answering.
